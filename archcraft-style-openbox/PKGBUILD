@@ -20,7 +20,8 @@ package() {
 	local _config=${pkgdir}/etc/skel/.config
 
 	mkdir -p ${pkgdir}/etc/skel/.config
-	configs=(`ls -p --hide={compton.conf,picom.conf,LICENSE,README.md} ${srcdir}/${pkgname}`)
+	mkdir -p ${pkgdir}/usr/lib/archcraft/common
+	configs=(`ls -p --hide={ac-include.cfg,compton.conf,picom.conf,LICENSE,README.md} ${srcdir}/${pkgname}`)
 
 	for config in "${configs[@]}"; do
 		cp -r ${srcdir}/${pkgname}/"$config"				"$_config"
@@ -28,4 +29,5 @@ package() {
 	
 	install -Dm644 ${srcdir}/${pkgname}/compton.conf		"$_config"/compton.conf
 	install -Dm644 ${srcdir}/${pkgname}/picom.conf			"$_config"/picom.conf
+	install -Dm644 ${srcdir}/${pkgname}/ac-include.cfg		${pkgdir}/usr/lib/archcraft/common/ac-include.cfg
 }
