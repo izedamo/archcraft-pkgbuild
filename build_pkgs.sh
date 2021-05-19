@@ -2,7 +2,7 @@
 
 ## Dirs
 DIR="$(pwd)"
-PKGS=(`ls -p --hide={LICENSE,README.md,build_pkgs.sh,packages}`)
+PKGS=(`ls --hide={LICENSE,README.md,build_pkgs.sh,packages}`)
 PKGDIR="$DIR/packages"
 
 ## Script Termination
@@ -29,7 +29,19 @@ build_pkgs () {
 		cd ${pkg} && makepkg -s
 		mv *.pkg.tar.zst "$PKGDIR"
 		ls --hide=PKGBUILD | xargs -d '\n' rm -r
-		{ cd "$DIR"; echo; }
+
+		# Verify
+		while true; do
+			set -- "$PKGDIR"/${pkg}-*
+			if [[ -f "$1" ]]; then
+				{ echo; echo "Package '${pkg}' generated successfully."; echo; }
+				break
+			else
+				{ echo; echo "Failed to build '${pkg}', Exiting..." >&2; }
+				{ echo; exit 1; }
+			fi
+		done
+		cd "$DIR"
 	done	
 }
 
