@@ -1,0 +1,28 @@
+# Maintainer: Aditya Shakya <@adi1090x>
+
+pkgname=archcraft-icon-packs
+pkgver=1.0
+pkgrel=1
+pkgdesc="Icon themes for Archcraft"
+arch=('any')
+license=('GPL3')
+makedepends=('git')
+depends=()
+conflicts=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+url="https://github.com/archcraft-os"
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+	local idir=${pkgdir}/usr/share/icons
+
+	mkdir -p ${pkgdir}/usr/share/icons
+	icons=(`ls -p --hide={LICENSE,README.md} ${srcdir}/${pkgname}`)
+
+	for icon in "${icons[@]}"; do
+		cp -r ${srcdir}/${pkgname}/"$icon"				"$idir"
+	done
+}

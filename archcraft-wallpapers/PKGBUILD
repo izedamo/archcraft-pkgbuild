@@ -1,0 +1,32 @@
+# Maintainer: Aditya Shakya <@adi1090x>
+
+pkgname=archcraft-wallpapers
+pkgver=1.0
+pkgrel=1
+pkgdesc="Wallpapers for Archcraft"
+arch=('any')
+license=('GPL3')
+makedepends=('git')
+depends=()
+conflicts=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+url="https://github.com/archcraft-os"
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+	local bgdir=${pkgdir}/usr/share/backgrounds
+
+	archcraft=(`ls -p ${srcdir}/${pkgname}/archcraft`)
+	extra=(`ls -p ${srcdir}/${pkgname}/extra`)
+
+	for ac in "${archcraft[@]}"; do
+		install -Dm644 ${srcdir}/${pkgname}/archcraft/"$ac"			"$bgdir"/"$ac"
+	done
+
+	for bg in "${extra[@]}"; do
+		install -Dm644 ${srcdir}/${pkgname}/extra/"$bg"			"$bgdir"/"$bg"
+	done
+}

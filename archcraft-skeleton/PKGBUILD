@@ -1,0 +1,39 @@
+# Maintainer: Aditya Shakya <@adi1090x>
+
+pkgname=archcraft-skeleton
+pkgver=1.0
+pkgrel=1
+pkgdesc="Skeleton files for Archcraft"
+arch=('any')
+license=('GPL3')
+makedepends=('git')
+depends=()
+conflicts=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+url="https://github.com/archcraft-os"
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+	local _skel=${pkgdir}/etc/skel
+	local _config=${pkgdir}/etc/skel/.config
+
+	mkdir -p ${pkgdir}/etc/skel/.config
+	configs=(`ls -p --hide={LICENSE,README.md,mimeapps.list} ${srcdir}/${pkgname}`)
+
+	for config in "${configs[@]}"; do
+		cp -r ${srcdir}/${pkgname}/"$config"				"$_config"
+	done
+	
+	cp -r ${srcdir}/${pkgname}/'.cache'						"$_skel"
+	cp -r ${srcdir}/${pkgname}/'.local'						"$_skel"
+	cp -r ${srcdir}/${pkgname}/'.mpd'						"$_skel"
+	cp -r ${srcdir}/${pkgname}/'.ncmpcpp'					"$_skel"
+	install -Dm644 ${srcdir}/${pkgname}/'.dmrc'				"$_skel"/'.dmrc'
+	install -Dm644 ${srcdir}/${pkgname}/'.face'				"$_skel"/'.face'
+	install -Dm644 ${srcdir}/${pkgname}/'.hushlogin'		"$_skel"/'.hushlogin'
+	install -Dm644 ${srcdir}/${pkgname}/'.vimrc'			"$_skel"/'.vimrc'
+	install -Dm644 ${srcdir}/${pkgname}/'mimeapps.list'		"$_config"/'mimeapps.list'
+}

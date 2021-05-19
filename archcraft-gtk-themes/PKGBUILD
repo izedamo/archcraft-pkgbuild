@@ -1,0 +1,28 @@
+# Maintainer: Aditya Shakya <@adi1090x>
+
+pkgname=archcraft-gtk-themes
+pkgver=1.0
+pkgrel=1
+pkgdesc="Openbox and gtk themes for Archcraft"
+arch=('any')
+license=('GPL3')
+makedepends=('git')
+depends=()
+conflicts=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+url="https://github.com/archcraft-os"
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+	local tdir=${pkgdir}/usr/share/themes
+
+	mkdir -p ${pkgdir}/usr/share/themes
+	themes=(`ls -p --hide={LICENSE,README.md} ${srcdir}/${pkgname}`)
+
+	for theme in "${themes[@]}"; do
+		cp -r ${srcdir}/${pkgname}/"$theme"				"$tdir"
+	done
+}

@@ -1,0 +1,34 @@
+# Maintainer: Aditya Shakya <@adi1090x>
+
+pkgname=archcraft-style-bspwm
+pkgver=1.0
+pkgrel=1
+pkgdesc="Bspwm files for Archcraft"
+arch=('any')
+license=('GPL3')
+makedepends=('git')
+depends=()
+conflicts=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+url="https://github.com/archcraft-os"
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+	local _skel=${pkgdir}/etc/skel
+	local _config=${pkgdir}/etc/skel/.config
+
+	mkdir -p ${pkgdir}/etc/skel/.config
+	configs=(`ls -p --hide={LICENSE,README.md} ${srcdir}/${pkgname}`)
+
+	for config in "${configs[@]}"; do
+		cp -r ${srcdir}/${pkgname}/"$config"				"$_config"
+	done
+	
+	cp -r ${srcdir}/${pkgname}/'.Xresources.d'				"$_skel"
+	install -Dm755 ${srcdir}/${pkgname}/'.fehbg'			"$_skel"/'.fehbg'
+	install -Dm644 ${srcdir}/${pkgname}/'.gtkrc-2.0'		"$_skel"/'.gtkrc-2.0'
+	install -Dm644 ${srcdir}/${pkgname}/'.Xresources'		"$_skel"/'.Xresources'
+}
