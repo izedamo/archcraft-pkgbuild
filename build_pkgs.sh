@@ -2,7 +2,8 @@
 
 ## Dirs
 DIR="$(pwd)"
-PKGS=(`ls -p --hide={LICENSE,README.md,build_pkgs.sh}`)
+PKGS=(`ls -p --hide={LICENSE,README.md,build_pkgs.sh,packages}`)
+PKGDIR="$DIR/packages"
 
 ## Script Termination
 exit_on_signal_SIGINT () {
@@ -26,7 +27,7 @@ build_pkgs () {
 	for pkg in "${PKGS[@]}"; do
 		echo "Building ${pkg}..."
 		cd ${pkg} && makepkg -s
-		mv *.pkg.tar.zst "$DIR"
+		mv *.pkg.tar.zst "$PKGDIR"
 		ls --hide=PKGBUILD | xargs -d '\n' rm -r
 		{ cd "$DIR"; echo; }
 	done	
