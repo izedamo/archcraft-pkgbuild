@@ -8,7 +8,7 @@ arch=('any')
 license=('GPL3')
 makedepends=('git')
 depends=()
-conflicts=()
+conflicts=('adapta-gtk-theme' 'arc-gtk-theme')
 provides=("${pkgname}")
 options=(!strip !emptydirs)
 
