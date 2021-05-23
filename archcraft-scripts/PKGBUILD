@@ -20,15 +20,11 @@ package() {
 	local bin=${pkgdir}/usr/bin
 	local localbin=${pkgdir}/usr/local/bin
 
-	lbin=(`ls -p --hide={abif_chrooted_post_install.sh,abif_post_install.sh,chrooted_post_install.sh,post_install.sh,device-info,LICENSE,README.md} ${srcdir}/${pkgname}`)
+	lbin=(`ls -p --hide={device-info,LICENSE,README.md} ${srcdir}/${pkgname}`)
 
 	for script in "${lbin[@]}"; do
 		install -Dm755 ${srcdir}/${pkgname}/"$script"						"$localbin"/"$script"
 	done
 
-	install -Dm755 ${srcdir}/${pkgname}/abif_chrooted_post_install.sh		"$bin"/abif_chrooted_post_install.sh
-	install -Dm755 ${srcdir}/${pkgname}/abif_post_install.sh				"$bin"/abif_post_install.sh
-	install -Dm755 ${srcdir}/${pkgname}/chrooted_post_install.sh			"$bin"/chrooted_post_install.sh
-	install -Dm755 ${srcdir}/${pkgname}/post_install.sh						"$bin"/post_install.sh
 	install -Dm755 ${srcdir}/${pkgname}/device-info							"$bin"/device-info	
 }
