@@ -33,6 +33,7 @@ package() {
 	cp -r ${srcdir}/${pkgname}/'.ncmpcpp'					"$_skel"
 	install -Dm644 ${srcdir}/${pkgname}/'.dmrc'				"$_skel"/'.dmrc'
 	install -Dm644 ${srcdir}/${pkgname}/'.face'				"$_skel"/'.face'
+	install -Dm644 ${srcdir}/${pkgname}/'.gtkrc-2.0'		"$_skel"/'.gtkrc-2.0'
 	install -Dm644 ${srcdir}/${pkgname}/'.hushlogin'		"$_skel"/'.hushlogin'
 	install -Dm644 ${srcdir}/${pkgname}/'.vimrc'			"$_skel"/'.vimrc'
 	install -Dm644 ${srcdir}/${pkgname}/'mimeapps.list'		"$_config"/'mimeapps.list'

@@ -29,6 +29,6 @@ package() {
 	
 	cp -r ${srcdir}/${pkgname}/'.Xresources.d'				"$_skel"
 	install -Dm755 ${srcdir}/${pkgname}/'.fehbg'			"$_skel"/'.fehbg'
-	install -Dm644 ${srcdir}/${pkgname}/'.gtkrc-2.0'		"$_skel"/'.gtkrc-2.0'
+	install -Dm644 ${srcdir}/${pkgname}/'.xsettingsd'		"$_skel"/'.xsettingsd'
 	install -Dm644 ${srcdir}/${pkgname}/'.Xresources'		"$_skel"/'.Xresources'
 }
