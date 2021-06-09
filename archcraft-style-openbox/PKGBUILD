@@ -2,12 +2,12 @@
 
 pkgname=archcraft-style-openbox
 pkgver=1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Openbox files for Archcraft"
 arch=('any')
 license=('GPL3')
 makedepends=('git')
-depends=()
+depends=('xfce4-terminal' 'xfce-polkit' 'baobab')
 conflicts=()
 provides=("${pkgname}")
 options=(!strip !emptydirs)
