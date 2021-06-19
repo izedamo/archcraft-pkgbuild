@@ -2,7 +2,7 @@
 
 pkgname=archcraft-style-bspwm
 pkgver=1.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Bspwm files for Archcraft"
 arch=('any')
 license=('GPL3')
