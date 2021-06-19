@@ -2,7 +2,7 @@
 
 pkgname=archcraft-icon-packs
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Icon themes for Archcraft"
 arch=('any')
 license=('GPL3')
